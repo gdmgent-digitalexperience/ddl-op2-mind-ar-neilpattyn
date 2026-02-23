@@ -1,29 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDL 02</title>
-    
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-    
-    <h1>Titelllll</h1>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
+  </head>
+  <body>
 
-    <nav>
-        <ul>
-            <li>
-                <a href="./index.html">Home</a>
-            </li>
-            <li>
-                <a href="./image.html">Image Tracking</a>
-            </li>
-            <li>
-                <a href="./face.html">Face Tracking</a>
-            </li>
-        </ul>
-    </nav>
+    <button class="switch-button" id="next-button">
+        SWITCH
+      </button>
 
-</body>
+    <a-assets>
+        <a-asset-item
+        id="cat"
+        src="./assets/cat_-_ps1_low_poly_rigged.glb"
+      ></a-asset-item>
+    </a-assets>
+
+    <a-scene
+      mindar-face
+      embedded
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-camera active="false" position="0 0 0"></a-camera>
+
+      <a-entity mindar-face-target="anchorIndex: 168">
+        <a-gltf-model
+          rotation="0 0 0"
+          position="0 0 0"
+          scale="0.5 0.5 0.5"
+          src="#cat"
+        ></a-gltf-model>
+      </a-entity>
+
+    
+    </a-scene>
+  </body>
 </html>
