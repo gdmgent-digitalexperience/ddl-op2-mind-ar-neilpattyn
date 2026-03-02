@@ -3,10 +3,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-aframe.prod.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
   </head>
   <body>
 
-    <button class="switch-button" id="next-button">
+    <button class="switch-button" id="switch">
         SWITCH
       </button>
 
@@ -15,6 +16,9 @@
         id="cat"
         src="./assets/cat_-_ps1_low_poly_rigged.glb"
       ></a-asset-item>
+      <a-asset-item
+      id="bomb" src="/assets/stylized_bomb.glb">
+      </a-asset-item>
     </a-assets>
 
     <a-scene
@@ -28,15 +32,43 @@
       <a-camera active="false" position="0 0 0"></a-camera>
 
       <a-entity mindar-face-target="anchorIndex: 168">
-        <a-gltf-model
+        <a-gltf-model id="cat-model"
           rotation="0 0 0"
           position="0 0 0"
           scale="0.5 0.5 0.5"
           src="#cat"
+          visible="true"
+        ></a-gltf-model>
+      </a-entity>
+
+      <a-entity mindar-face-target="anchorIndex: 5">
+        <a-gltf-model id="bomb-model"
+          rotation="0 0 0"
+          position="0 0 0"
+          scale="0.5 0.5 0.5"
+          src="#bomb"
+          visible="false"
         ></a-gltf-model>
       </a-entity>
 
     
     </a-scene>
+
+    <script>
+      const switchButton = document.getElementById("switch");
+      const catModel = document.getElementById("cat-model");
+      const bombModel = document.getElementById("bomb-model");
+
+      // Add click event to switch button
+      switchButton.addEventListener("click", () => {
+        if (!catModel || !bombModel) return;
+        const isCatVisible = catModel.getAttribute("visible") === true || catModel.getAttribute("visible") === "true";
+        catModel.setAttribute("visible", !isCatVisible);
+        bombModel.setAttribute("visible", isCatVisible);
+      });
+    </script>
+    
   </body>
+
+
 </html>
